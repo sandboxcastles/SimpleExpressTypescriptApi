@@ -7,12 +7,13 @@ export class MongoDatabase {
     private _database: Db;
     
     public async startDatabase() {
-        console.log('starting db...');
-        const mongod = new MongoMemoryServer();
-        const mongoDbUrl = await mongod.getUri();
-        const client = new MongoClient(mongoDbUrl, { useUnifiedTopology: true });
-        const connection = await client.connect();
-        this._database = connection.db();
+        if (!this._database) {
+            const mongod = new MongoMemoryServer();
+            const mongoDbUrl = await mongod.getUri();
+            const client = new MongoClient(mongoDbUrl, { useUnifiedTopology: true });
+            const connection = await client.connect();
+            this._database = connection.db();
+        }
     }
     
     public async getDatabase() {

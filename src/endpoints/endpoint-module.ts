@@ -2,7 +2,7 @@ import * as express from 'express';
 import { ObjectId } from 'mongodb';
 
 import { environment } from '../environment';
-import { IEndpointModule } from '../interfaces/endoint-module';
+import { IEndpointModule } from '../interfaces/endpoint-module';
 import { IRepository } from '../interfaces/repository';
 import { IMongoDbItem } from '../models/mongodb-item';
 

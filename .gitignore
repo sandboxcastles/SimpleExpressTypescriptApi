@@ -1,2 +1,4 @@
 /node_modules/
-**/*.js
+/release-builds/
+src/**/*.js
+out/

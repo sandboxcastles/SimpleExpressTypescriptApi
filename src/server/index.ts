@@ -7,13 +7,22 @@ import { MongoDatabase } from '../database/mongo';
 
 import * as middleware from '../middleware';
 import * as startServer from './start-server';
+import { isValidPort } from '../ports/valid-port';
 
-middleware.useMiddleware(app);
+export function start(startPort = -1) {
 
-const db = new MongoDatabase();
-addEndpoints(app, db);
-addCollections(db);
+    let port = Number(startPort);
 
-const args = process.argv.slice(2);
-const port = getPort(args, environment.port);
-startServer.start(app, port, environment.baseUrl);
+    if (!isValidPort(port)) {
+        const args = process.argv.slice(2);
+        port = getPort(args, environment.port);
+    }
+
+    middleware.useMiddleware(app);
+
+    const db = new MongoDatabase();
+    
+    addEndpoints(app, db);
+    addCollections(db);
+    startServer.start(app, port, environment.baseUrl);
+}

@@ -1,11 +1,12 @@
 import { app } from '../app';
 import { addCollections } from '../database/add-collections';
-import { MongoDatabase } from '../database/mongo';
 import { addEndpoints } from '../endpoints';
 import { environment } from '../environment';
+import { getPort } from '../ports/get-port';
+import { MongoDatabase } from '../database/mongo';
+
 import * as middleware from '../middleware';
 import * as startServer from './start-server';
-import { getPort } from '../ports/get-port';
 
 middleware.useMiddleware(app);
 
